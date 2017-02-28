@@ -13,12 +13,8 @@ function required() {
 }
 
 function formActionsReduce(acc, action) {
-  // NOTE: #Siren-consideration: action.name='[match]-item'
-  const match = (action.name.match(/^(create|delete|update|view)/) || [])[1];
-
-  /* istanbul ignore else */
-  if (match) {
-    acc[match] = action;
+  if (hasOne('class', 'resource', action)) {
+    acc[action.class[1]] = action;
   }
 
   return acc;
@@ -26,7 +22,8 @@ function formActionsReduce(acc, action) {
 
 function formModel(props = required()) {
   if (!props.actions || !isArray(props.actions)) {
-    throw new Error('No `actions` provided; "view-item" action is required.');
+    // eslint-disable-next-line max-len
+    throw new Error('No `actions` provided; an action is required for display.');
   }
 
   const actions = props.actions

@@ -64,7 +64,7 @@ function luxReact(config) {
 
   app.component = component.bind(app);
   app.page = page.bind(app);
-  app.request = path => request(app.config.apiRoot, path);
+  app.request = (path, options) => request(app.config.apiRoot, path, options);
   app.visit = path => visit(app.request, setState, path);
 
   Object.defineProperty(app, 'state', {
@@ -167,7 +167,7 @@ function render(app, setState, state) {
 }
 
 // Make an API request
-function request(apiRoot, path) {
+function request(apiRoot, path, options) {
   const parsed = luxPath(`${path || window.location}`);
 
   const URI = routing(parsed)
@@ -179,7 +179,7 @@ function request(apiRoot, path) {
     // resource or an error.
     : `${apiRoot}${parsed}`;
 
-  return apiRequest(URI)
+  return apiRequest(URI, options)
     .then((response) => {
       // the "parsed" path is necessary to lookup a "page" handler later on
       response.path = parsed;

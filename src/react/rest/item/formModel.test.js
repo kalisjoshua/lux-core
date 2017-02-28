@@ -12,6 +12,7 @@ describe('Rest.Item', function () {
       props = {
         actions: [
           {
+            class: ['resource', 'view'],
             fields: [
               {
                 name: 'movies',
@@ -70,14 +71,14 @@ describe('Rest.Item', function () {
     it('should throw an error if no `actions` provided', function () {
       expect(function () {
         formModel({});
-      }).toThrow('No `actions` provided; "view-item" action is required.');
+      }).toThrow('No `actions` provided; an action is required for display.');
     });
 
     it('should throw an error if no "view" action provided', function () {
       expect(function () {
         formModel({ actions: [
           {
-            name: 'something-weird'
+            class: ['something', 'weird'],
           }
         ] });
       }).toThrow('View action not provided; which would include fields[].');
@@ -88,7 +89,7 @@ describe('Rest.Item', function () {
         formModel({
           actions: [
             {
-              name: 'view-item'
+              class: ['resource', 'view'],
             }
           ]
         });
@@ -152,6 +153,7 @@ describe('Rest.Item', function () {
         ],
         title: 'Foo Bar',
         view: {
+          class: ['resource', 'view'],
           fields: [
             {
               name: 'movies',

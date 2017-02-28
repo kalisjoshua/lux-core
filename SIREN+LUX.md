@@ -132,7 +132,7 @@ the scope, and the intent of the `action`. The **scope** will answer for the
     + resource - a collection or an item
     + field - a particular field of a resource
   - **Intent** ("How")
-    + `(c___)` create
+    + `(c___)` submit
     + `(___d)` delete
     + `(__u_)` submit
     + `(_r__)` view
@@ -140,15 +140,16 @@ the scope, and the intent of the `action`. The **scope** will answer for the
 *Each `action` should identify one, and only one, of each: scope, and intent.*
 
 Not all combinations of scope and intent are necessarily relevant to all APIs;
-some APIs might allow for creation of top-level resource but other not. User
+some APIs might allow for creation of top-level resource but others not. User
 permissions might change one combination to another; for example, an
-unauthenticated user might receive `["resource", "view"]` while an
-authenticated user will receive `["resource", "submit"]` for the same resource.
+authenticated user might receive `class : ['resource', 'submit']` while an
+other users would receive `class: ['resource', 'view']` for the same resource.
 
 ## Action Names
 
-Some actions are "special" and need to be used in specific locations within the
-UI. These are the "special" action names and their purposes:
+Some action names are "reserved" for specific application requirements; these
+reserved actions need to be placed as specific parts of the UI. These (below)
+are the "reserved" action names and their purposes:
 
   - `login`
     + Defines a form for enabling a user to authenticate
@@ -160,7 +161,8 @@ UI. These are the "special" action names and their purposes:
   - `search` - for performing search
 
 These action names need to be unique within a resource representation as they
-are specifically searched for by LuxUI for placement.
+are specifically searched for by LuxUI for placement. The names for actions
+which are not "reserved" are completely ignored by LuxUI.
 
 ## Embedded Entities
 

@@ -5,24 +5,29 @@ import registry from '../../lib/componentRegistry';
 import { siren } from '../siren.propType';
 
 import './field';
+import './buttons';
+import './notification';
 
-function FormComponent(props) {
+
+function FormComponent(props, context) {
+  const Buttons = registry('Lux.Form.Buttons');
   const Field = registry('Lux.Form.Field');
+  const Notification = registry('Lux.Form.Notification');
 
   return (
     <form className="limit-width">
-
-      {/* <!-- notification --> */}
+      <Notification {...context.state.notification} />
 
       {props.schema.map((field, indx) => <Field key={indx} {...field} />)}
 
-      {/* <!-- buttons --> */}
+      <Buttons {...props} />
     </form>
   );
 }
+FormComponent.contextTypes = {
+  state: React.PropTypes.object,
+};
 FormComponent.propTypes = {
-  // eslint-disable-next-line react/no-unused-prop-types
-  create: siren.action,
   // eslint-disable-next-line react/no-unused-prop-types
   delete: siren.action,
   // eslint-disable-next-line max-len
@@ -30,7 +35,9 @@ FormComponent.propTypes = {
   properties: React.PropTypes.object.isRequired,
   schema: React.PropTypes.arrayOf(siren.field),
   // eslint-disable-next-line react/no-unused-prop-types
-  view: siren.action,
+  submit: siren.action,
+  // eslint-disable-next-line react/no-unused-prop-types
+  // view: siren.action,
 };
 
 registry('Lux.Form', FormComponent, false);
