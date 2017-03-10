@@ -159,7 +159,7 @@ describe('luxReact', function () {
 
       // API call: __resource__
       app.request(path);
-      expect(apiRequest).lastCalledWith(`${config.apiRoot}${path}`);
+      expect(apiRequest).lastCalledWith(`${config.apiRoot}${path}`, undefined);
 
       // return true to indicate that the path is a page, not a resource
       routingMock.mockReturnValueOnce(true);
@@ -167,7 +167,7 @@ describe('luxReact', function () {
 
       // API call: __root__
       app.request(path);
-      expect(apiRequest).lastCalledWith(`${config.apiRoot}`);
+      expect(apiRequest).lastCalledWith(`${config.apiRoot}`, undefined);
     });
 
     it('should use `window.location` as a default when no path is provided', function () {
@@ -175,7 +175,7 @@ describe('luxReact', function () {
 
       return app.request()
         .then(function () {
-          expect(apiRequest).lastCalledWith(`${config.apiRoot}${testingURL}`);
+          expect(apiRequest).lastCalledWith(`${config.apiRoot}${testingURL}`, undefined);
         });
     });
   });

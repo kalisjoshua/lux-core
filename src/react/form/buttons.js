@@ -44,8 +44,11 @@ function clickHandler(props, context) {
   const currentState = context.state;
 
   const options = {
-    method: props.method,
     body: currentState.data.properties,
+    headers: {
+      'Content-Type': props.type,
+    },
+    method: props.method,
   };
 
   context.request(props.href, options)

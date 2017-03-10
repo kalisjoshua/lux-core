@@ -5,7 +5,7 @@
 
 import herald from './herald';
 
-import { handler as responseModelRequestHandler } from './responseModel';
+import { handler as toResponseModel } from './responseModel';
 import storage from './storage';
 
 const responseProperties = [
@@ -18,27 +18,6 @@ const responseProperties = [
   'type',
   'url',
 ];
-
-// Make Response properties available beyond Promise-chain; after .json().
-function resolvedResponse(response) {
-  function format(body) {
-
-    return {
-      body,
-      ...responseProperties
-        .reduce(props, {}),
-    };
-  }
-
-  function props(acc, prop) {
-    acc[prop] = response[prop];
-
-    return acc;
-  }
-
-  return response.json()
-    .then(format);
-}
 
 /**
  * The API Client (`apiRequest`) provides a simple and consistent interface for
@@ -103,8 +82,8 @@ function apiRequest(URI = '/', options = {}) {
 
   return fetch(URI, options)
     .then(retryFactory(URI, options))
-    .then(resolvedResponse)
-    .then(responseModelRequestHandler);
+    .then(toResponseFormat)
+    .then(toResponseModel);
 }
 
 function retryFactory(URI, options) {
@@ -133,6 +112,32 @@ function retryFactory(URI, options) {
   }
 
   return retry;
+}
+
+// Make Response properties available beyond Promise-chain; after .json().
+function toResponseFormat(response) {
+  function format(body) {
+
+    return {
+      body,
+      ...responseProperties
+        .reduce(propsReduce, {}),
+    };
+  }
+
+  function propsReduce(acc, prop) {
+    acc[prop] = response[prop];
+
+    return acc;
+  }
+
+  const result =
+    (response.status === 204 || /no content/i.test(response.statusText))
+      ? new Promise(resolve => resolve(undefined))
+      : response.json();
+
+  return result
+    .then(format);
 }
 
 export default apiRequest;
