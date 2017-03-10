@@ -63,20 +63,20 @@ function clickHandler(props, context) {
         case 400:
           currentState.notification = {
             message: response.body || 'Validation errors.',
-            type: 'error',
+            type: 'failure',
           };
           // TODO: implement server validation errors mapping to fields
           break;
         case 403:
           currentState.notification = {
             message: response.body || 'Not authorized.',
-            type: 'error',
+            type: 'failure',
           };
           break;
         default:
           currentState.notification = {
             message: response.body || 'Unexpected server response.',
-            type: 'error',
+            type: 'failure',
           };
           break;
       }

@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotificationComponent should render a "Alert" notification component 1`] = `
+<div
+  className="notification"
+>
+  <div
+    className="notification__icon notification__icon--alert"
+    dangerouslySetInnerHTML="<svg class=\\"icon icon--big\\" viewBox=\\"0 0 100 100\\">
+      <use xmlns:xlink=\\"http://www.w3.org/1999/xlink\\" xlink:href=\\"#bell\\"></use>
+    </svg>"
+  />
+  <div
+    className="notification__text"
+  >
+    <span>
+      Alert
+    </span>
+  </div>
+  <div
+    className="notification__icon notification__icon--dismiss clickable"
+    dangerouslySetInnerHTML="<svg class=\\"icon icon--big\\" viewBox=\\"0 0 100 100\\">
+      <use xmlns:xlink=\\"http://www.w3.org/1999/xlink\\" xlink:href=\\"#times\\"></use>
+    </svg>"
+    data-js-notification="dismiss"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`NotificationComponent should render a "Fail" notification component 1`] = `
+<div
+  className="notification"
+>
+  <div
+    className="notification__icon notification__icon--failure"
+    dangerouslySetInnerHTML="<svg class=\\"icon icon--big\\" viewBox=\\"0 0 100 100\\">
+      <use xmlns:xlink=\\"http://www.w3.org/1999/xlink\\" xlink:href=\\"#exclamation\\"></use>
+    </svg>"
+  />
+  <div
+    className="notification__text"
+  >
+    <span>
+      Fail
+    </span>
+  </div>
+  <div
+    className="notification__icon notification__icon--dismiss clickable"
+    dangerouslySetInnerHTML="<svg class=\\"icon icon--big\\" viewBox=\\"0 0 100 100\\">
+      <use xmlns:xlink=\\"http://www.w3.org/1999/xlink\\" xlink:href=\\"#times\\"></use>
+    </svg>"
+    data-js-notification="dismiss"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`NotificationComponent should render a "Success" notification component 1`] = `
+<div
+  className="notification"
+>
+  <div
+    className="notification__icon notification__icon--success"
+    dangerouslySetInnerHTML="<svg class=\\"icon icon--big\\" viewBox=\\"0 0 100 100\\">
+      <use xmlns:xlink=\\"http://www.w3.org/1999/xlink\\" xlink:href=\\"#check\\"></use>
+    </svg>"
+  />
+  <div
+    className="notification__text"
+  >
+    <span>
+      Success
+    </span>
+  </div>
+  <div
+    className="notification__icon notification__icon--dismiss clickable"
+    dangerouslySetInnerHTML="<svg class=\\"icon icon--big\\" viewBox=\\"0 0 100 100\\">
+      <use xmlns:xlink=\\"http://www.w3.org/1999/xlink\\" xlink:href=\\"#times\\"></use>
+    </svg>"
+    data-js-notification="dismiss"
+    onClick={[Function]}
+  />
+</div>
+`;

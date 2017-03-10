@@ -16,7 +16,9 @@ function FormComponent(props, context) {
 
   return (
     <form className="limit-width">
-      <Notification {...context.state.notification} />
+      {(context.state.notification) && (
+        <Notification {...context.state.notification} />
+      )}
 
       {props.schema.map((field, indx) => <Field key={indx} {...field} />)}
 
