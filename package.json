@@ -1,6 +1,6 @@
 {
   "name": "@luxui/lux",
-  "version": "1.0.0-alpha-4",
+  "version": "1.0.0-alpha-6",
   "description": "LuxUI is a web UI rendering framework that translates Siren APIs into fully interactive web applications.",
   "main": "dist/reactLux.js",
   "files": [
@@ -20,7 +20,6 @@
     "build:react": "export LUX_FRAMEWORK=react && rollup -c rollup.js",
     "doc": "jsdoc -c ./jsdoc.json -d ./pages/docs --readme ./pages/index.md",
     "predoc": "rm -rf ./pages/docs",
-    "postinstall": "npm run airbnbPeers && npm run peers && git reset --hard HEAD",
     "lint": "eslint src/",
     "pages:content": "npm run doc && npm run test",
     "pages:publish": "git push upstream `git subtree split --prefix pages master`:gh-pages --force",

@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import registry from '../../lib/componentRegistry';
 
-import './button';
+import './buttons';
 
 const Button = registry('Lux.Form.Button');
 

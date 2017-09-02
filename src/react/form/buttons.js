@@ -4,6 +4,8 @@ import registry from '../../lib/componentRegistry';
 
 import '../button';
 
+import './actionHandler';
+
 function ButtonsComponent(props, context) {
   const Button = registry('Lux.Button');
 
@@ -51,38 +53,11 @@ function clickHandler(props, context) {
     method: props.method,
   };
 
-  context.request(props.href, options)
-    .then((response) => {
-      switch (response.status) {
-        case 200:
-          currentState.notification = {
-            message: response.body || 'Successful.',
-            type: 'success',
-          };
-          break;
-        case 400:
-          currentState.notification = {
-            message: response.body || 'Validation errors.',
-            type: 'failure',
-          };
-          // TODO: implement server validation errors mapping to fields
-          break;
-        case 403:
-          currentState.notification = {
-            message: response.body || 'Not authorized.',
-            type: 'failure',
-          };
-          break;
-        default:
-          currentState.notification = {
-            message: response.body || 'Unexpected server response.',
-            type: 'failure',
-          };
-          break;
-      }
+  const formActionHandler = registry('Lux.Form.ActionHandler');
 
-      context.setState(currentState);
-    });
+  context.request(props.href, options)
+    .then(response => formActionHandler(response, currentState))
+    .then(newState => context.setState(newState));
 }
 
 registry('Lux.Form.Buttons', ButtonsComponent, false);
